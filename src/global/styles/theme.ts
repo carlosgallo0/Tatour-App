@@ -1,5 +1,28 @@
 export const theme = {
-    colors: {
+    colors:{ 
+      logo: '#9f2221',
+
+      primary150:'#f36f56',
+      primary100: '#fc9c34',
+      primary50: '#ffc344',
+      primary25: '#ffe5b3',
+
+      secondary100: '#a47ef6',
+      secondary75: '#c381dc',
+
+      light100:'#f4f7fa',
+      light50: '#ffffff',
+      shadow:'#e6e6e6',
+      outline: '#cad0db',
+
+      dark100:'#26264f',
+      dark75: '#5a285b',
+      dark50: '#3b4078',
+      
+      line:'#fd7fa2'
+    },
+
+    colorsAlt: {
       primary: '#E51C44',
       
       secondary100: '#0A1033',
@@ -21,7 +44,7 @@ export const theme = {
       discord: '#7289da'
     },
   
-    fonts: {
+    fontsAlt: {
       title700: 'Rajdhani_700Bold',
       title500: 'Rajdhani_500Medium',
       text400: 'Inter_400Regular',

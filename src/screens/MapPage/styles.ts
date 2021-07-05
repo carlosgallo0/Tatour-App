@@ -2,6 +2,7 @@ import { StyleSheet,Dimensions } from "react-native";
 import {theme} from "../../global/styles/theme"
 
 
+
 export const styles = StyleSheet.create({
     container:{
         flex:1,
@@ -11,7 +12,8 @@ export const styles = StyleSheet.create({
     },
     map:{
         width: Dimensions.get('window').width,
-        height: Dimensions.get('window').height*.85,
+        //height: Dimensions.get('window').height*.85,
+        flex:3,
         //backgroundColor: theme.colors.primary150,
         alignSelf: 'flex-end',
 

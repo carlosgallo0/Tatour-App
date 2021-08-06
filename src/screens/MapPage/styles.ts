@@ -1,40 +1,28 @@
-import { StyleSheet,Dimensions } from "react-native";
+
 import {theme} from "../../global/styles/theme"
 
+import styled from 'styled-components/native'
+import MapView from 'react-native-maps'
+import { Dimensions } from "react-native";
+
+export const Container = styled.View`
+align-items: center ;
+justify-content: space-around;
+flex:1;
+width: 100%;
+`;
+
+export const MapContainer = styled.View`
+`;
 
 
-export const styles = StyleSheet.create({
-    container:{
-        flex:1,
-        backgroundColor: theme.colors.light100,
-        alignItems: "center",
-        justifyContent: "center",
-    },
-    map:{
-        width: Dimensions.get('window').width,
-        //height: Dimensions.get('window').height*.85,
-        flex:3,
-        //backgroundColor: theme.colors.primary150,
-        alignSelf: 'flex-end',
+export const Map = styled(MapView)`
+width: 400px;
+height:600px
 
-    },
-    textContainer:{
-        flex:1,
-        alignItems: "center",
-        justifyContent: "center",
-        backgroundColor: theme.colors.light100,
-        width: Dimensions.get('window').width,
-        height: Dimensions.get('window').height*.15,
-        borderColor:theme.colors.primary100,
-        borderWidth: 3,
-    },
-    title:{
-        color: theme.colors.dark100,
-        fontSize:24
-    },
-    text:{
-        color: theme.colors.dark50,
-        fontSize:18,
-        textAlign: 'center',
-    }
-})
+`;
+
+export const Title = styled.Text`
+color: black;
+font-size: 24px;
+`;

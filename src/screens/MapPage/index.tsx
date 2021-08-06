@@ -1,77 +1,44 @@
 
-import React, {useState, useEffect, useRef} from 'react'
-import {SafeAreaView,View, Text} from 'react-native'
-import MapView from 'react-native-maps'
-import {styles} from './styles';
-import * as Location from 'expo-location'
-import * as Permissions from 'expo-permissions';
-
-export function MapPage(){
-
-//código do rapaz
-
-const [origin, setOrigin]=useState(null)
-
-useEffect(()=>{
-    (async function(){
-        const { status, permissions } = await Permissions.askAsync(Permissions.LOCATION);
-        if (status === 'granted') {
-            let location = await Location.getCurrentPositionAsync({enableHighAccuracy: true});
-            setOrigin({
-                latitude: location.coords.latitude,
-                longitude: location.coords.longitude,
-                latitudeDelta: 0.02,
-                longitudeDelta: 0.02
-            })
-        } else {
-            throw new Error('Location permission not granted');
-        }
-    })();
-},[]);
+import React, {useState} from 'react'
+import {MapViewProps} from 'react-native-maps';
+import {SafeAreaView} from 'react-native'
 
 
-//state of the art
-    // const [origin, setOrigin]=useState(null)
-    // const [errorMsg, setErrorMsg] = useState(null);
+import {Container, MapContainer,  Map, Title} from './styles';
+
+export function MapPage(...rest){
+    const [point, setPoint] = useState();
+    const [poinst, setPoints] = useState();
 
 
-    // useEffect(() => {
-    //     (async function(){
-    //         const { status, permissions } = await Location.askAsync(Permissions.LOCATION_FOREGROUND);
-    //         if (status === 'granted') {
-    //             let location = await Location.getCurrentPositionAsync({enableHighAccuracy: true});
-    //             setOrigin({
-    //                 latitude: location.coords.latitude,
-    //                 longitude: location.coords.longitude,
-    //                 latitudeDelta: 0.01,
-    //                 longitudeDelta: 0.01
-    //         })
-    //         }else {
-    //           throw new Error('Location permission not granted');
-    //         }
-    //     })()
-    // },[])
 
+ const mockRegion = {
+    latitude: -22.908,
+    longitude: -43.17,
+    latitudeDelta: 0.06,
+    longitudeDelta:0.04,
+
+    }
+
+    const handleLongPressEvents = (nativeEvent) => {
+        const pointCoordinare = nativeEvent.coordinate;
+        const position = nativeEvent.position;
+        console.log('hi', position)
+
+    }
 
     return(
-        <SafeAreaView style={styles.container}>
-            <MapView 
-            style={styles.map}
-            initialRegion={origin}
-            showsUserLocation={true}
-            loadingEnabled={true}           
-            />
-
-            <View style={styles.textContainer}>
-                <Text style={styles.title}>
-                    Olá mundo! 👋
-                </Text>
-
-                <Text style={styles.text}>
-                {`Eu sou a pagina de mapas \n 🌎`}
-                </Text>
-            </View>
-        </SafeAreaView>
+        <Container>
+            <MapContainer >
+                <Map {...rest}
+                 initialRegion={mockRegion}
+                 onLongPress={e => handleLongPressEvents(e.nativeEvent)}
+                 />
+            </MapContainer> 
+                <Title>
+                {`I 💖 bubu`}
+                </Title>
+        </Container>
     )
 
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 
 
-export function Icon(){
 
+export function Icon(){
 }

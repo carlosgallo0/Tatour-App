@@ -16,9 +16,13 @@ align-items: center ;
 justify-content: space-around;
 flex:1;
 width: 100%;
+/* background-color: ${theme.colors.outline }; */
 `;
 
 export const MapContainer = styled.View`
+align-items:center;
+width:100%;
+height:100%;
 `;
 
 export const Map = styled(MapView)`
@@ -30,27 +34,39 @@ z-index:1;
 `;
 
 export const Button = styled.TouchableOpacity`
-    background-color: ${theme.colors.light100 };
+    position: absolute; 
+
     align-items:center;
+    flex-direction:row;
+    justify-content:space-evenly
 
-    height: ${RFPercentage(10)}px;
-    width: ${RFPercentage(30)}px;
+   
+    
+    height: ${RFPercentage(7)}px;
+    width: ${RFPercentage(40)}px;
+    
+    background-color: ${theme.colors.light50};
 
+    border-color: ${theme.colors.line } ;
+    border-width: 2px;
     border-radius: 5px;
-
-    position:relative;
-    left: ${(Dimensions.get('window').width)/2};
-    top: 30 px;
+    margin-top: 20px;
+    
+    
+    
+    /* left: ${(Dimensions.get('window').width)/2};
+    top: 30 px;  */
 `;
 
 export const Title = styled.Text`
-color: black;
+color: ${theme.colors.dark100};;
 font-size: 24px;
+
 `;
 
 export const Icon = styled(MaterialCommunityIcons).attrs(
 )`
-    color: ${theme.colors.primary150 };
+    color: ${theme.colors.line};
     font-size: ${RFValue(30)}px;
 
 `;

@@ -6,8 +6,21 @@ import {SafeAreaView} from 'react-native'
 
 import {Container, MapContainer,  Map, Title, Button, Icon} from './styles';
 
+console.log('abriu o map page')
 
+type Props = MapViewProps & {
+    title: string;
 
+}
+
+export function MapPage({...rest}){
+const [baseCoordinates, setBaseCoordinates] = useState<coordinates>();
+const [basePosition, setBasePosition] = useState<position>() 
+
+const [newPointCoordinates, setNewPointCoordinates] = useState<coordinates>();
+const [newPointPosition, setNewPointPosition] = useState<position>();
+
+const [pointsCoordinates, setPointsCoordinates] = useState<coordinates[]>([]);
 interface coordinates {
     latitude:number,
     longitude:number
@@ -17,37 +30,20 @@ interface position {
     y:number
 }
 
-
-
-
-export function MapPage(...rest){
-    const [baseCoordinates, setBaseCoordinates] = useState<coordinates>();
-    const [basePosition, setBasePosition] = useState<position>() 
-
-    const [newPointCoordinates, setNewPointCoordinates] = useState<coordinates>();
-    const [newPointPosition, setNewPointPosition] = useState<position>();
-
-    const [pointsCoordinates, setPointsCoordinates] = useState<coordinates>();
-
-
-
     const mockRegion = {
         latitude: -22.908,
         longitude: -43.17,
         latitudeDelta: 0.06,
         longitudeDelta:0.04,
-
         }
 
     const handleLongPressEvents = (nativeEvent) => {
         const pointCoordinates= nativeEvent.coordinate;
-        const position = nativeEvent.position;
-
+        //const position = nativeEvent.position;
         setBaseCoordinates(pointCoordinates)
-        setBasePosition(position)
+        //setBasePosition(position)
 
-        console.log(basePosition)
-
+        //console.log('baseCoordinates: ', baseCoordinates )
     }
 
     const handlePressEvents = (nativeEvent) => {
@@ -57,7 +53,7 @@ export function MapPage(...rest){
         setNewPointCoordinates(pointCoordinates)
         setNewPointPosition(position)
 
-        console.log(newPointCoordinates)
+        //console.log(newPointCoordinates)
 
     }
 
@@ -73,13 +69,13 @@ export function MapPage(...rest){
                  onPress={e => handlePressEvents(e.nativeEvent)}
                  onLongPress={e => handleLongPressEvents(e.nativeEvent)}
                  />
-                 <Button> 
-                    <Title>Fazer a consulta</Title>
-                </Button>
+                    <Button> 
 
                 <Icon name='map-marker-radius' 
                 // postition={newPointPosition}
-                ></Icon>
+                />
+                        <Title>Fazer a consulta</Title>
+                </Button>
             </MapContainer> 
         </Container>
     )

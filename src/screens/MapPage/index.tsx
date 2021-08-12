@@ -1,7 +1,10 @@
 
 import React, {useState} from 'react'
-import {MapViewProps} from 'react-native-maps';
-import {SafeAreaView} from 'react-native'
+import {theme} from "../../global/styles/theme"
+
+
+import {MapViewProps, Marker} from 'react-native-maps';
+import {SafeAreaView, View, Text} from 'react-native'
 
 
 import {Container, MapContainer,  Map, Title, Button, Icon} from './styles';
@@ -15,10 +18,9 @@ type Props = MapViewProps & {
 
 export function MapPage({...rest}){
 const [baseCoordinates, setBaseCoordinates] = useState<coordinates>();
-const [basePosition, setBasePosition] = useState<position>() 
-
 const [newPointCoordinates, setNewPointCoordinates] = useState<coordinates>();
-const [newPointPosition, setNewPointPosition] = useState<position>();
+// const [basePosition, setBasePosition] = useState<position>() 
+//const [newPointPosition, setNewPointPosition] = useState<position>();
 
 const [pointsCoordinates, setPointsCoordinates] = useState<coordinates[]>([]);
 interface coordinates {
@@ -41,17 +43,16 @@ interface position {
         const pointCoordinates= nativeEvent.coordinate;
         //const position = nativeEvent.position;
         setBaseCoordinates(pointCoordinates)
-        //setBasePosition(position)
+        setPointsCoordinates([])
 
-        //console.log('baseCoordinates: ', baseCoordinates )
+        console.log('baseCoordinates: ', baseCoordinates )
     }
 
     const handlePressEvents = (nativeEvent) => {
-        const pointCoordinates= nativeEvent.coordinate;
-        const position = nativeEvent.position;
+        const eventPointCoordinates= nativeEvent.coordinate;
 
-        setNewPointCoordinates(pointCoordinates)
-        setNewPointPosition(position)
+        setNewPointCoordinates(eventPointCoordinates)
+        //setNewPointPosition(position)
 
         //console.log(newPointCoordinates)
 
@@ -68,12 +69,34 @@ interface position {
                  initialRegion={mockRegion}
                  onPress={e => handlePressEvents(e.nativeEvent)}
                  onLongPress={e => handleLongPressEvents(e.nativeEvent)}
-                 />
-                    <Button> 
+                 >
+                     { baseCoordinates &&
+                     <Marker
+                        coordinate={baseCoordinates}
+                        title='Base'
+                    >
+                        <View style={{backgroundColor:theme.colors.line, padding: 10, borderRadius: 10}}>
+                            <Text>B</Text>
+                        </View>
+                    </Marker>
+                    }
+                    { newPointCoordinates &&
+                        <Marker
+                        coordinate={newPointCoordinates}
+                        title='Job'
+                    >
+                        <View style={{backgroundColor:theme.colors.primary100, padding: 5, borderRadius: 10}}>
+                            <Text>P</Text>
+                        </View>
+                    </Marker>
 
-                <Icon name='map-marker-radius' 
-                // postition={newPointPosition}
-                />
+                    }
+
+                 </Map>
+                    <Button> 
+                        <Icon name='map-marker-radius' 
+
+                        />
                         <Title>Fazer a consulta</Title>
                 </Button>
             </MapContainer> 

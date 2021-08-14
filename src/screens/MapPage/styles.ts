@@ -40,6 +40,8 @@ export const Button = styled.TouchableOpacity`
     flex-direction:row;
     justify-content:space-evenly
 
+
+
    
     
     height: ${RFPercentage(7)}px;
@@ -48,9 +50,9 @@ export const Button = styled.TouchableOpacity`
     background-color: ${theme.colors.light50};
 
     border-color: ${theme.colors.line } ;
-    border-width: 2px;
-    border-radius: 5px;
-    margin-top: 20px;
+    border-width: 1px;
+    border-radius: 10px;
+    margin-top: 50px;
     
     
     

@@ -9,28 +9,22 @@ import {SafeAreaView, View, Text} from 'react-native'
 
 import {Container, MapContainer,  Map, Title, Button, Icon} from './styles';
 
-console.log('abriu o map page')
+import { CustomMarker, CustomMarkerProps } from '../../components/CustomMarker';
 
+import {coordinates, JobsProps} from '../../global/types/vroomTypes'
 type Props = MapViewProps & {
     title: string;
 
 }
 
+
+
+
+
 export function MapPage({...rest}){
 const [baseCoordinates, setBaseCoordinates] = useState<coordinates>();
-const [newPointCoordinates, setNewPointCoordinates] = useState<coordinates>();
-// const [basePosition, setBasePosition] = useState<position>() 
-//const [newPointPosition, setNewPointPosition] = useState<position>();
 
 const [pointsCoordinates, setPointsCoordinates] = useState<coordinates[]>([]);
-interface coordinates {
-    latitude:number,
-    longitude:number
-}
-interface position {
-    x:number,
-    y:number
-}
 
     const mockRegion = {
         latitude: -22.908,
@@ -49,16 +43,13 @@ interface position {
     }
 
     const handlePressEvents = (nativeEvent) => {
-        const eventPointCoordinates= nativeEvent.coordinate;
 
-        setNewPointCoordinates(eventPointCoordinates)
-        //setNewPointPosition(position)
 
-        //console.log(newPointCoordinates)
+        setPointsCoordinates([...pointsCoordinates, nativeEvent.coordinate])
+        console.log(pointsCoordinates)
 
-    }
+        //console.log((Date.now() + Math.random()).toString())
 
-    const renderIcon =( ) => {
 
     }
 
@@ -80,26 +71,30 @@ interface position {
                         </View>
                     </Marker>
                     }
-                    { newPointCoordinates &&
+
+                    {pointsCoordinates.map((item) => 
                         <Marker
-                        coordinate={newPointCoordinates}
-                        title='Job'
-                    >
+                        key={Math.random()}
+                        coordinate={item}
+                        title={'test'}
+                      >
                         <View style={{backgroundColor:theme.colors.primary100, padding: 5, borderRadius: 10}}>
                             <Text>P</Text>
                         </View>
-                    </Marker>
+                        </Marker>
+                    )
 
                     }
 
+
+
                  </Map>
+            </MapContainer> 
                     <Button> 
                         <Icon name='map-marker-radius' 
-
                         />
                         <Title>Fazer a consulta</Title>
                 </Button>
-            </MapContainer> 
         </Container>
     )
 

@@ -12,9 +12,12 @@ import {Container, MapContainer,  Map, Title, Button, Icon} from './styles';
 import { CustomMarker, CustomMarkerProps } from '../../components/CustomMarker';
 
 import {coordinates, JobsProps} from '../../global/types/vroomTypes'
+
+import { fetchApiCallExample } from '../../services/api'
+
+
 type Props = MapViewProps & {
     title: string;
-
 }
 
 
@@ -90,7 +93,9 @@ const [pointsCoordinates, setPointsCoordinates] = useState<coordinates[]>([]);
 
                  </Map>
             </MapContainer> 
-                    <Button> 
+                    <Button
+                        onPress = {fetchApiCallExample}
+                    > 
                         <Icon name='map-marker-radius' 
                         />
                         <Title>Fazer a consulta</Title>

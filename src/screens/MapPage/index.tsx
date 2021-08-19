@@ -13,7 +13,7 @@ import { CustomMarker, CustomMarkerProps } from '../../components/CustomMarker';
 
 import {coordinates, JobsProps} from '../../global/types/vroomTypes'
 
-import { fetchApiCallExample } from '../../services/api'
+import { fetchApiCallExample, postFetchApiCallExample } from '../../services/api'
 
 
 type Props = MapViewProps & {
@@ -66,7 +66,7 @@ const [pointsCoordinates, setPointsCoordinates] = useState<coordinates[]>([]);
                  >
                      { baseCoordinates &&
                      <Marker
-                        coordinate={baseCoordinates}
+                            coordinate={baseCoordinates}
                         title='Base'
                     >
                         <View style={{backgroundColor:theme.colors.line, padding: 10, borderRadius: 10}}>
@@ -94,7 +94,7 @@ const [pointsCoordinates, setPointsCoordinates] = useState<coordinates[]>([]);
                  </Map>
             </MapContainer> 
                     <Button
-                        onPress = {fetchApiCallExample}
+                        onPress = {postFetchApiCallExample}
                     > 
                         <Icon name='map-marker-radius' 
                         />

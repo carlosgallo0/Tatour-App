@@ -38,18 +38,16 @@ export const Button = styled.TouchableOpacity`
 
     align-items:center;
     flex-direction:row;
-    justify-content:space-evenly
-
-
+    justify-content:space-evenly;
 
    
     
     height: ${RFPercentage(7)}px;
     width: ${RFPercentage(40)}px;
     
-    background-color: ${theme.colors.light50};
+    background-color: ${theme.colors.primary100};
 
-    border-color: ${theme.colors.line } ;
+    border-color: ${theme.colors.light50} ;
     border-width: 1px;
     border-radius: 10px;
     margin-top: 50px;
@@ -61,14 +59,40 @@ export const Button = styled.TouchableOpacity`
 `;
 
 export const Title = styled.Text`
-color: ${theme.colors.dark100};;
+color: ${theme.colors.light100};
 font-size: 24px;
+font-weight: 700;
 
 `;
 
 export const Icon = styled(MaterialCommunityIcons).attrs(
 )`
-    color: ${theme.colors.line};
+    color: ${theme.colors.light100};
     font-size: ${RFValue(30)}px;
 
+`;
+
+export const ButtonTest = styled.TouchableOpacity`
+    position: absolute; 
+
+    align-items:center;
+    flex-direction:row;
+    justify-content:space-evenly
+
+   
+    
+    height: ${RFPercentage(7)}px;
+    width: ${RFPercentage(40)}px;
+    
+    background-color: ${theme.colors.primary150};
+
+    border-color: ${theme.colors.light50} ;
+    border-width: 2px;
+    border-radius: 10px;
+    margin-top: 100px;
+    
+    
+    
+    /* left: ${(Dimensions.get('window').width)/2};
+    top: 30 px;  */
 `;

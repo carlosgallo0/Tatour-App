@@ -7,12 +7,15 @@ import {MapViewProps, Marker} from 'react-native-maps';
 import {SafeAreaView, View, Text} from 'react-native'
 
 
-import {Container, MapContainer,  Map, Title, Button, Icon} from './styles';
+import {Container, MapContainer,  Map, Title, Button, Icon, ButtonTest} from './styles';
 
 import { CustomMarker, CustomMarkerProps } from '../../components/CustomMarker';
 
 import {coordinates, JobsProps} from '../../global/types/vroomTypes'
 
+
+
+import {setRouteOptimizationInput} from '../../services/setRouteOptimizationInput'
 import { fetchApiCallExample, postFetchApiCallExample } from '../../services/api'
 
 
@@ -41,15 +44,13 @@ const [pointsCoordinates, setPointsCoordinates] = useState<coordinates[]>([]);
         //const position = nativeEvent.position;
         setBaseCoordinates(pointCoordinates)
         setPointsCoordinates([])
-
-        console.log('baseCoordinates: ', baseCoordinates )
     }
 
     const handlePressEvents = (nativeEvent) => {
 
 
         setPointsCoordinates([...pointsCoordinates, nativeEvent.coordinate])
-        console.log(pointsCoordinates)
+
 
         //console.log((Date.now() + Math.random()).toString())
 
@@ -95,11 +96,20 @@ const [pointsCoordinates, setPointsCoordinates] = useState<coordinates[]>([]);
             </MapContainer> 
                     <Button
                         onPress = {postFetchApiCallExample}
+                        onLongPress = {()=>console.log('baseCoordinates: ', baseCoordinates, 'pointsCoordinates: ', pointsCoordinates)}
                     > 
-                        <Icon name='map-marker-radius' 
-                        />
-                        <Title>Fazer a consulta</Title>
+                        {/* <Icon name='map-marker-radius' 
+                        /> */}
+                        <Title>OTIMIZAR</Title>
                 </Button>
+                <ButtonTest
+                    onPress = {
+                       ()=> setRouteOptimizationInput(baseCoordinates, pointsCoordinates )
+                    }
+                >
+                    <Title>TESTE</Title>
+                </ButtonTest>
+    
         </Container>
     )
 

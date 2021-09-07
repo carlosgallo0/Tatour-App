@@ -22,14 +22,14 @@ export const fetchApiCallExample = () => {
       });
   } 
 
-  export const postFetchApiCallExample = () => {
+  export const postFetchApiCallExample = (inputOptimizationJson=defaultJsonExample) => {
     fetch("https://api.openrouteservice.org/optimization", {
       "method": "POST",
       "headers": {    
         "Authorization": `${OPEN_TRIP_AUTHORIZATION}`,
         "Content-Type": "application/json"
       },
-      "body": JSON.stringify(defaultJsonExample)
+      "body": JSON.stringify(inputOptimizationJson)
     })
       .then(response => response.json())
       .then(response => {

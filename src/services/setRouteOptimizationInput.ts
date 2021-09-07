@@ -1,5 +1,6 @@
 import { baseCoordinates, pointsCoordinates } from './stateExample'
 import { coordinates} from '../global/types/vroomTypes'
+import {postFetchApiCallExample} from './api'
 
 interface setRouteOptimizationInputProps{
     baseCoordinates:coordinates;
@@ -9,43 +10,41 @@ interface setRouteOptimizationInputProps{
 
 export function setRouteOptimizationInput(baseCoordinates:coordinates,pointsCoordinates:coordinates[]){
 if(baseCoordinates && pointsCoordinates){
-   
-
-    }
-
     const jobs = pointsCoordinates.map((pointCoordinates, index)=>{
-        id: index,
-        service: 300,
-        location:[
-            pointCoordinates.latitude,
-            pointCoordinates.longitude
-        ]
-    })
-
-        const vehicles = [{
-            "id": 1, 
-            "profile": "driving-car",
-            "start":[
-                baseCoordinates.latitude,
-                baseCoordinates.longitude
+        return {
+            id: index,
+            service: 300,
+            location:[
+                pointCoordinates.longitude,
+                pointCoordinates.latitude,
             ],
-            "end":[
-                baseCoordinates.latitude,
-                baseCoordinates.longitude
-            ]
+            time_windows: [
+				[
+                    32400,
+					36000
+				]
+			]
             
-            
-        }]
-        
-        // console.log('baseCoordinates: ', typeof baseCoordinates, baseCoordinates)
-        
-        // console.log('pointsCoordinates: ', typeof pointsCoordinates, pointsCoordinates)
-        
-        // console.log('vehicles: ', vehicles)
-        console.log('pointsCoordinates: ', pointsCoordinates)
-        console.log('jobs: ', jobs)
-
-
-     
+        }
+    })
+    const vehicles = [{
+        "id": 1, 
+        "profile": "driving-car",
+        "start":[
+            baseCoordinates.longitude,
+            baseCoordinates.latitude,
+        ],
+        "end":[
+            baseCoordinates.longitude,
+            baseCoordinates.latitude,
+        ]
+    }]
+    postFetchApiCallExample({
+        jobs,
+        vehicles
+    })
+    
+    
+        }
     }
-}
+

@@ -4,15 +4,7 @@ import { theme } from "../../global/styles/theme";
 import { MapViewProps, Marker } from "react-native-maps";
 import { SafeAreaView, View, Text } from "react-native";
 
-import {
-  Container,
-  MapContainer,
-  Map,
-  Title,
-  Button,
-  Icon,
-  ButtonTest,
-} from "./styles";
+import { Container, MapContainer, Map, Title, Button, Icon } from "./styles";
 
 import { CustomMarker, CustomMarkerProps } from "../../components/CustomMarker";
 
@@ -53,64 +45,48 @@ export function MapPage({ ...rest }) {
 
   return (
     <Container>
-      <MapContainer>
-        <Map
-          {...rest}
-          initialRegion={mockRegion}
-          onPress={(e) => handlePressEvents(e.nativeEvent)}
-          onLongPress={(e) => handleLongPressEvents(e.nativeEvent)}
-        >
-          {baseCoordinates && (
-            <Marker coordinate={baseCoordinates} title="Base">
-              <View
-                style={{
-                  backgroundColor: theme.colors.line,
-                  padding: 10,
-                  borderRadius: 10,
-                }}
-              >
-                <Text>B</Text>
-              </View>
-            </Marker>
-          )}
-
-          {pointsCoordinates.map((item) => (
-            <Marker key={Math.random()} coordinate={item} title={"test"}>
-              <View
-                style={{
-                  backgroundColor: theme.colors.primary100,
-                  padding: 5,
-                  borderRadius: 10,
-                }}
-              >
-                <Text>P</Text>
-              </View>
-            </Marker>
-          ))}
-        </Map>
-      </MapContainer>
-      <Button
-        onPress={postFetchApiCallExample}
-        onLongPress={() =>
-          console.log(
-            "baseCoordinates: ",
-            baseCoordinates,
-            "pointsCoordinates: ",
-            pointsCoordinates
-          )
-        }
+      <Map
+        {...rest}
+        initialRegion={mockRegion}
+        onPress={(e) => handlePressEvents(e.nativeEvent)}
+        onLongPress={(e) => handleLongPressEvents(e.nativeEvent)}
       >
-        {/* <Icon name='map-marker-radius' 
-                        /> */}
-        <Title>OTIMIZAR</Title>
-      </Button>
-      <ButtonTest
+        {baseCoordinates && (
+          <Marker coordinate={baseCoordinates} title="Base">
+            <View
+              style={{
+                backgroundColor: theme.colors.line,
+                padding: 10,
+                borderRadius: 10,
+              }}
+            >
+              <Text>B</Text>
+            </View>
+          </Marker>
+        )}
+
+        {pointsCoordinates.map((item) => (
+          <Marker key={Math.random()} coordinate={item} title={"test"}>
+            <View
+              style={{
+                backgroundColor: theme.colors.primary100,
+                padding: 5,
+                borderRadius: 10,
+              }}
+            >
+              <Text>P</Text>
+            </View>
+          </Marker>
+        ))}
+      </Map>
+
+      <Button
         onPress={() =>
           setRouteOptimizationInput(baseCoordinates, pointsCoordinates)
         }
       >
-        <Title>TESTE</Title>
-      </ButtonTest>
+        <Title>OTIMIZAR ROTA</Title>
+      </Button>
     </Container>
   );
 }

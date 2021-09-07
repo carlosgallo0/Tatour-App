@@ -51,7 +51,4 @@ export const Button = styled.TouchableOpacity`
   border-radius: 10px;
 
   bottom: 60px;
-
-  /* left: ${Dimensions.get("window").width / 2};
-    top: 30 px;  */
 `;

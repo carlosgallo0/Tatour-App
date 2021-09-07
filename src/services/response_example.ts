@@ -1,3 +1,5 @@
+const myResponse = {};
+
 const responseExample = {
   code: 0,
   summary: {

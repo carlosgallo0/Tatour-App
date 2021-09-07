@@ -10,11 +10,8 @@ import { CustomMarker, CustomMarkerProps } from "../../components/CustomMarker";
 
 import { coordinates, JobsProps } from "../../global/types/vroomTypes";
 
-import { setRouteOptimizationInput } from "../../services/setRouteOptimizationInput";
-import {
-  fetchApiCallExample,
-  postFetchApiCallExample,
-} from "../../services/api";
+import { handleOptimizeButtonClick } from "../../services/handleOptimizeButtonClick";
+import { fetchApiCallExample, postOptimizationAPI } from "../../services/api";
 
 type Props = MapViewProps & {
   title: string;
@@ -82,7 +79,7 @@ export function MapPage({ ...rest }) {
 
       <Button
         onPress={() =>
-          setRouteOptimizationInput(baseCoordinates, pointsCoordinates)
+          handleOptimizeButtonClick(baseCoordinates, pointsCoordinates)
         }
       >
         <Title>OTIMIZAR ROTA</Title>

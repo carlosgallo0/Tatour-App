@@ -9,7 +9,8 @@ import { MapLines } from "./components/MapLines";
 
 import { coordinates } from "../../global/types/vroomTypes";
 
-import { handleOptimizeButtonClick } from "../../services/handleOptimizeButtonClick";
+import { setOptimizationInput } from "../../services/setOptimizationInput";
+import { postOptimizationAPI } from "../../services/api";
 
 type Props = MapViewProps & {
   title: string;
@@ -18,9 +19,7 @@ type Props = MapViewProps & {
 export function MapPage({ ...rest }) {
   const [baseCoordinates, setBaseCoordinates] = useState<coordinates>();
   const [pointsCoordinates, setPointsCoordinates] = useState<coordinates[]>([]);
-  const [optimizedPointsCoordinates, setOptimizedPointsCoordinates] = useState(
-    []
-  );
+  const [optimizedPointsCoordinates, setOptimizedPointsCoordinates] = useState<coordinates[]>([]);
 
   const mockRegion = {
     latitude: -22.908,
@@ -37,23 +36,29 @@ export function MapPage({ ...rest }) {
     { latitude: -22.914174849474556, longitude: -43.1990971416235 },
   ];
 
-  const handleLongPressEvents = (nativeEvent) => {
+  const handleMapLongPressEvents = (nativeEvent) => {
     const pointCoordinates = nativeEvent.coordinate;
     setBaseCoordinates(pointCoordinates);
     setPointsCoordinates([]);
   };
 
-  const handlePressEvents = (nativeEvent) => {
+  const handleMapPressEvents = (nativeEvent) => {
     setPointsCoordinates([...pointsCoordinates, nativeEvent.coordinate]);
   };
 
+  const handleOptimizationButtonPress = (
+    baseCoordinates: coordinates,
+    pointsCoordinates: coordinates[]
+  ) => {
+    postOptimizationAPI(setOptimizationInput(baseCoordinates, pointsCoordinates));
+  };
   return (
     <Container>
       <Map
         {...rest}
         initialRegion={mockRegion}
-        onPress={(e) => handlePressEvents(e.nativeEvent)}
-        onLongPress={(e) => handleLongPressEvents(e.nativeEvent)}
+        onPress={(e) => handleMapPressEvents(e.nativeEvent)}
+        onLongPress={(e) => handleMapLongPressEvents(e.nativeEvent)}
       >
         <MapLines coordinates={mockOptimizedPointsCoordinates} />
         {baseCoordinates && (
@@ -84,14 +89,11 @@ export function MapPage({ ...rest }) {
           </Marker>
         ))}
       </Map>
-
-      <Button
-        onPress={() =>
-          handleOptimizeButtonClick(baseCoordinates, pointsCoordinates)
-        }
-      >
-        <Title>OTIMIZAR ROTA</Title>
-      </Button>
+      {baseCoordinates && pointsCoordinates && (
+        <Button onPress={() => handleOptimizationButtonPress(baseCoordinates, pointsCoordinates)}>
+          <Title>OTIMIZAR ROTA</Title>
+        </Button>
+      )}
     </Container>
   );
 }

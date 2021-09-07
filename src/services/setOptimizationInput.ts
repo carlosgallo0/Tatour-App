@@ -1,7 +1,7 @@
 import { coordinates } from "../global/types/vroomTypes";
 import { postOptimizationAPI } from "./api";
 
-export function handleOptimizeButtonClick(
+export function setOptimizationInput(
   baseCoordinates: coordinates,
   pointsCoordinates: coordinates[]
 ) {
@@ -22,9 +22,9 @@ export function handleOptimizeButtonClick(
         end: [baseCoordinates.longitude, baseCoordinates.latitude],
       },
     ];
-    postOptimizationAPI({
+    return {
       jobs,
       vehicles,
-    });
+    };
   }
 }

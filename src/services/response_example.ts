@@ -1,4 +1,92 @@
-const myResponse = {};
+//location: [pointCoordinates.longitude, pointCoordinates.latitude]
+const myResponse = {
+  code: 0,
+  routes: [
+    {
+      cost: 1785,
+      duration: 1785,
+      service: 1500,
+      steps: [
+        {
+          arrival: 31946,
+          duration: 0,
+          location: [-43.20372596383095, -22.904589380614983],
+          type: "start",
+        },
+        {
+          arrival: 32400,
+          duration: 454,
+          id: 1,
+          job: 1,
+          location: [-43.21035571396352, -22.90370176860781],
+          service: 300,
+          type: "job",
+          waiting_time: 0,
+        },
+        {
+          arrival: 32780,
+          duration: 534,
+          id: 0,
+          job: 0,
+          location: [-43.20950377732515, -22.909536614724093],
+          service: 300,
+          type: "job",
+          waiting_time: 0,
+        },
+        {
+          arrival: 33336,
+          duration: 790,
+          id: 2,
+          job: 2,
+          location: [-43.20061560720205, -22.8973894875608],
+          service: 300,
+          type: "job",
+          waiting_time: 0,
+        },
+        {
+          arrival: 33950,
+          duration: 1104,
+          id: 4,
+          job: 4,
+          location: [-43.1990971416235, -22.914174849474556],
+          service: 300,
+          type: "job",
+          waiting_time: 0,
+        },
+        {
+          arrival: 34460,
+          duration: 1314,
+          id: 3,
+          job: 3,
+          location: [-43.192578703165054, -22.90765891680816],
+          service: 300,
+          type: "job",
+          waiting_time: 0,
+        },
+        {
+          arrival: 35231,
+          duration: 1785,
+          location: [-43.20372596383095, -22.904589380614983],
+          type: "end",
+        },
+      ],
+      vehicle: 1,
+      waiting_time: 0,
+    },
+  ],
+  summary: {
+    computing_times: {
+      loading: 54,
+      solving: 0,
+    },
+    cost: 1785,
+    duration: 1785,
+    service: 1500,
+    unassigned: 0,
+    waiting_time: 0,
+  },
+  unassigned: [],
+};
 
 const responseExample = {
   code: 0,

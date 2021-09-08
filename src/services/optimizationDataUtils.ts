@@ -11,7 +11,7 @@ export function setOptimizationInput(
         id: index,
         service: 300,
         location: [pointCoordinates.longitude, pointCoordinates.latitude],
-        time_windows: [[32400, 36000]],
+        time_windows: [[32400, 68400]],
       };
     });
     const vehicles = [

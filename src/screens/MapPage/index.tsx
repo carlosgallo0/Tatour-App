@@ -52,7 +52,9 @@ export function MapPage({ ...rest }) {
 
   useEffect(() => {
     const newOptimizedPointsCoordinates = getLatLngFromMyResponse(optimizationResponse);
+
     setOptimizedPointsCoordinates(newOptimizedPointsCoordinates);
+    console.log("newOptimizedPointsCoordinates", newOptimizedPointsCoordinates);
   }, [optimizationResponse]);
 
   async function handleOptimizationButtonPress(
@@ -61,10 +63,10 @@ export function MapPage({ ...rest }) {
   ) {
     const inputJson = setOptimizationInput(baseCoordinates, pointsCoordinates);
 
-    const currentResponse = postOptimizationAPI(inputJson);
+    const currentResponse = postOptimizationAPI(inputJson, setOptimizationResponse);
 
-    await console.log("o currentResponse: ", currentResponse);
-    await setOptimizationResponse(currentResponse);
+    // await console.log("o currentResponse: ", currentResponse);
+    // await setOptimizationResponse(currentResponse);
   }
 
   return (
@@ -105,7 +107,10 @@ export function MapPage({ ...rest }) {
         ))}
       </Map>
       {baseCoordinates && pointsCoordinates && (
-        <Button onPress={() => handleOptimizationButtonPress(baseCoordinates, pointsCoordinates)}>
+        <Button
+          onPress={() => handleOptimizationButtonPress(baseCoordinates, pointsCoordinates)}
+          onLongPress={() => console.log("optimizationResponse: ", optimizationResponse)}
+        >
           <Title>OTIMIZAR ROTA</Title>
         </Button>
       )}

@@ -34,8 +34,8 @@ export function getLatLngFromMyResponse(response) {
   if (response?.code === 0) {
     const latLng = response.routes[0].steps.map((step) => {
       return {
-        latitude: step.location[0],
-        longitude: step.location[1],
+        latitude: step.location[1],
+        longitude: step.location[0],
       };
     });
     return latLng;

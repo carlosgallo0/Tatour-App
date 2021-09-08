@@ -41,9 +41,9 @@ export function MapPage({ ...rest }) {
   ];
 
   const handleMapLongPressEvents = (nativeEvent) => {
-    const pointCoordinates = nativeEvent.coordinate;
-    setBaseCoordinates(pointCoordinates);
+    setBaseCoordinates(nativeEvent.coordinate);
     setPointsCoordinates([]);
+    setOptimizedPointsCoordinates([]);
   };
 
   const handleMapPressEvents = (nativeEvent) => {
@@ -52,7 +52,9 @@ export function MapPage({ ...rest }) {
 
   useEffect(() => {
     const newOptimizedPointsCoordinates = getLatLngFromMyResponse(optimizationResponse);
+
     setOptimizedPointsCoordinates(newOptimizedPointsCoordinates);
+    console.log("newOptimizedPointsCoordinates", newOptimizedPointsCoordinates);
   }, [optimizationResponse]);
 
   async function handleOptimizationButtonPress(
@@ -61,10 +63,10 @@ export function MapPage({ ...rest }) {
   ) {
     const inputJson = setOptimizationInput(baseCoordinates, pointsCoordinates);
 
-    const currentResponse = postOptimizationAPI(inputJson);
+    const currentResponse = postOptimizationAPI(inputJson, setOptimizationResponse);
 
-    await console.log("o currentResponse: ", currentResponse);
-    await setOptimizationResponse(currentResponse);
+    // await console.log("o currentResponse: ", currentResponse);
+    // await setOptimizationResponse(currentResponse);
   }
 
   return (
@@ -77,12 +79,15 @@ export function MapPage({ ...rest }) {
       >
         <MapLines optimizedCoordinates={optimizedPointsCoordinates} />
         {baseCoordinates && (
-          <Marker coordinate={baseCoordinates} title="Base">
+          <Marker key={1} coordinate={baseCoordinates} title="Base">
             <View
               style={{
                 backgroundColor: theme.colors.line,
-                padding: 10,
-                borderRadius: 10,
+                borderRadius: 20,
+                width: 35,
+                height: 35,
+                alignItems: "center",
+                justifyContent: "center",
               }}
             >
               <Text>B</Text>
@@ -91,21 +96,28 @@ export function MapPage({ ...rest }) {
         )}
 
         {pointsCoordinates.map((item) => (
-          <Marker key={Math.random()} coordinate={item} title={"test"}>
+          <Marker key={Math.random()} coordinate={item} title={"job"}>
             <View
               style={{
                 backgroundColor: theme.colors.primary100,
-                padding: 5,
-                borderRadius: 10,
+                padding: 0,
+                borderRadius: 20,
+                width: 30,
+                height: 30,
+                alignItems: "center",
+                justifyContent: "center",
               }}
             >
-              <Text>P</Text>
+              <Text>J</Text>
             </View>
           </Marker>
         ))}
       </Map>
       {baseCoordinates && pointsCoordinates && (
-        <Button onPress={() => handleOptimizationButtonPress(baseCoordinates, pointsCoordinates)}>
+        <Button
+          onPress={() => handleOptimizationButtonPress(baseCoordinates, pointsCoordinates)}
+          // onLongPress={() => console.log("optimizationResponse: ", optimizationResponse)}
+        >
           <Title>OTIMIZAR ROTA</Title>
         </Button>
       )}

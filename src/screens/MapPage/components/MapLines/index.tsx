@@ -2,11 +2,12 @@ import React from "react";
 import { Polyline } from "react-native-maps";
 import { Container } from "./styles";
 
-export function MapLines({ coordinates }) {
+export function MapLines({ optimizedCoordinates }) {
+  //   console.log("o optimizedCoordinates: ", optimizedCoordinates);
   return (
     <Polyline
       //testar primeiro com lat: lng: e depois tentar inverter a ordem
-      coordinates={coordinates}
+      coordinates={optimizedCoordinates}
       strokeColor="#000" // fallback for when `strokeColors` is not supported by the map-provider
       //   strokeColors={[
       //     "#7F0000",

@@ -28,3 +28,18 @@ export function setOptimizationInput(
     };
   }
 }
+
+export function getLatLngFromMyResponse(response) {
+  // debugger;
+  if (response?.code === 0) {
+    const latLng = response.routes[0].steps.map((step) => {
+      return {
+        latitude: step.location[0],
+        longitude: step.location[1],
+      };
+    });
+    return latLng;
+  } else {
+    return [];
+  }
+}

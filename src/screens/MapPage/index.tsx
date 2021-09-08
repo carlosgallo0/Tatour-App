@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { theme } from "../../global/styles/theme";
 
 import { MapViewProps, Marker, Polyline } from "react-native-maps";
@@ -9,7 +9,10 @@ import { MapLines } from "./components/MapLines";
 
 import { coordinates } from "../../global/types/vroomTypes";
 
-import { setOptimizationInput } from "../../services/setOptimizationInput";
+import {
+  setOptimizationInput,
+  getLatLngFromMyResponse,
+} from "../../services/optimizationDataUtils";
 import { postOptimizationAPI } from "../../services/api";
 
 type Props = MapViewProps & {
@@ -20,6 +23,7 @@ export function MapPage({ ...rest }) {
   const [baseCoordinates, setBaseCoordinates] = useState<coordinates>();
   const [pointsCoordinates, setPointsCoordinates] = useState<coordinates[]>([]);
   const [optimizedPointsCoordinates, setOptimizedPointsCoordinates] = useState<coordinates[]>([]);
+  const [optimizationResponse, setOptimizationResponse] = useState();
 
   const mockRegion = {
     latitude: -22.908,
@@ -46,12 +50,23 @@ export function MapPage({ ...rest }) {
     setPointsCoordinates([...pointsCoordinates, nativeEvent.coordinate]);
   };
 
-  const handleOptimizationButtonPress = (
+  useEffect(() => {
+    const newOptimizedPointsCoordinates = getLatLngFromMyResponse(optimizationResponse);
+    setOptimizedPointsCoordinates(newOptimizedPointsCoordinates);
+  }, [optimizationResponse]);
+
+  async function handleOptimizationButtonPress(
     baseCoordinates: coordinates,
     pointsCoordinates: coordinates[]
-  ) => {
-    postOptimizationAPI(setOptimizationInput(baseCoordinates, pointsCoordinates));
-  };
+  ) {
+    const inputJson = setOptimizationInput(baseCoordinates, pointsCoordinates);
+
+    const currentResponse = postOptimizationAPI(inputJson);
+
+    await console.log("o currentResponse: ", currentResponse);
+    await setOptimizationResponse(currentResponse);
+  }
+
   return (
     <Container>
       <Map
@@ -60,7 +75,7 @@ export function MapPage({ ...rest }) {
         onPress={(e) => handleMapPressEvents(e.nativeEvent)}
         onLongPress={(e) => handleMapLongPressEvents(e.nativeEvent)}
       >
-        <MapLines coordinates={mockOptimizedPointsCoordinates} />
+        <MapLines optimizedCoordinates={optimizedPointsCoordinates} />
         {baseCoordinates && (
           <Marker coordinate={baseCoordinates} title="Base">
             <View

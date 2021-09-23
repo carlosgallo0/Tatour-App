@@ -63,7 +63,9 @@ export function MapPage({ ...rest }) {
   ) {
     const inputJson = setOptimizationInput(baseCoordinates, pointsCoordinates);
 
-    const currentResponse = postOptimizationAPI(inputJson, setOptimizationResponse);
+    const currentResponse = await postOptimizationAPI(inputJson, setOptimizationResponse);
+
+    setOptimizationResponse(currentResponse);
 
     // await console.log("o currentResponse: ", currentResponse);
     // await setOptimizationResponse(currentResponse);

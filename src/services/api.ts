@@ -21,7 +21,7 @@ export const fetchApiCallExample = () => {
 };
 
 export const postOptimizationAPI = (inputOptimizationJson, setOptimizationResponse) => {
-  fetch("https://api.openrouteservice.org/optimization", {
+  const optimizationResponse = fetch("https://api.openrouteservice.org/optimization", {
     method: "POST",
     headers: {
       Authorization: `${OPEN_TRIP_AUTHORIZATION}`,
@@ -32,9 +32,12 @@ export const postOptimizationAPI = (inputOptimizationJson, setOptimizationRespon
     .then((response) => response.json())
     .then((response) => {
       console.log("o response: ", response);
-      setOptimizationResponse(response);
+      return response;
     })
     .catch((err) => {
       console.log(err);
+      return err;
     });
+
+  return optimizationResponse;
 };

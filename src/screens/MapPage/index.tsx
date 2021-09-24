@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { theme } from "../../global/styles/theme";
 
-import { MapViewProps, Marker, Polyline } from "react-native-maps";
+import { MapViewProps, Marker } from "react-native-maps";
 import { View, Text } from "react-native";
 import { Container, Map, Title, Button, Icon } from "./styles";
 import { CustomMarker, CustomMarkerProps } from "../../components/CustomMarker";
@@ -12,6 +12,7 @@ import { coordinates } from "../../global/types/vroomTypes";
 import {
   setOptimizationInput,
   getLatLngFromMyResponse,
+  getOptimizedCoordinatesFromMyResponse,
 } from "../../services/optimizationDataUtils";
 import { postOptimizationAPI } from "../../services/api";
 
@@ -31,14 +32,6 @@ export function MapPage({ ...rest }) {
     latitudeDelta: 0.06,
     longitudeDelta: 0.04,
   };
-
-  const mockOptimizedPointsCoordinates = [
-    { latitude: -22.904589380614983, longitude: -43.20372596383095 },
-    { latitude: -22.90370176860781, longitude: -43.21035571396352 },
-    { latitude: -22.909536614724093, longitude: -43.20950377732515 },
-    { latitude: -22.8973894875608, longitude: -43.20061560720205 },
-    { latitude: -22.914174849474556, longitude: -43.1990971416235 },
-  ];
 
   const handleMapLongPressEvents = (nativeEvent) => {
     setBaseCoordinates(nativeEvent.coordinate);
@@ -63,11 +56,11 @@ export function MapPage({ ...rest }) {
   ) {
     const inputJson = setOptimizationInput(baseCoordinates, pointsCoordinates);
 
-    const currentResponse = await postOptimizationAPI(inputJson, setOptimizationResponse);
+    const currentResponse = await postOptimizationAPI(inputJson);
 
     setOptimizationResponse(currentResponse);
 
-    // await console.log("o currentResponse: ", currentResponse);
+    console.log("o currentResponse: ", currentResponse);
     // await setOptimizationResponse(currentResponse);
   }
 
@@ -118,7 +111,7 @@ export function MapPage({ ...rest }) {
       {baseCoordinates && pointsCoordinates && (
         <Button
           onPress={() => handleOptimizationButtonPress(baseCoordinates, pointsCoordinates)}
-          // onLongPress={() => console.log("optimizationResponse: ", optimizationResponse)}
+          onLongPress={() => getOptimizedCoordinatesFromMyResponse()}
         >
           <Title>OTIMIZAR ROTA</Title>
         </Button>

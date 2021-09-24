@@ -20,7 +20,7 @@ export const fetchApiCallExample = () => {
     });
 };
 
-export const postOptimizationAPI = (inputOptimizationJson, setOptimizationResponse) => {
+export const postOptimizationAPI = (inputOptimizationJson) => {
   const optimizationResponse = fetch("https://api.openrouteservice.org/optimization", {
     method: "POST",
     headers: {

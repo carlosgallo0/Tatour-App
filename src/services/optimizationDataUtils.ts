@@ -1,5 +1,8 @@
 import { coordinates } from "../global/types/vroomTypes";
-import { postOptimizationAPI } from "./api";
+
+const Polyline = require("@mapbox/polyline");
+
+//input handling
 
 export function setOptimizationInput(
   baseCoordinates: coordinates,
@@ -22,12 +25,19 @@ export function setOptimizationInput(
         end: [baseCoordinates.longitude, baseCoordinates.latitude],
       },
     ];
+
+    const options = {
+      g: true,
+    };
     return {
       jobs,
       vehicles,
+      options,
     };
   }
 }
+
+//response handling
 
 export function getLatLngFromMyResponse(response) {
   // debugger;
@@ -42,4 +52,10 @@ export function getLatLngFromMyResponse(response) {
   } else {
     return [];
   }
+}
+
+export function getOptimizedCoordinatesFromMyResponse() {
+  return Polyline.decode(
+    "yxfiHaxoMs@jGK`AIr@eA~JCLMd@K|@E^MfAADE^SN[RKNILTGVOPMROB[D[Js@AIEc@I]qAgJEWAMw@aF]cCCMCSIg@WcBIa@Ko@CQQgAQeACScAmGGYTKdAg@r@y@LOn@u@RUv@}@dAoA^c@DGj@q@tCmDHKJMhDcELKb@c@^~Af@tCDNTxAFVF`@JEjAg@tBaAPIE]]iBKGkEnBIDTxAFVMFkCpAKAUIMlAk@`FCRCRi@vEWzBC\\E\\EVE^AJYjCSlB"
+  );
 }

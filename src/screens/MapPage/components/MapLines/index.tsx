@@ -4,7 +4,6 @@ import { theme } from "../../../../global/styles/theme";
 import { Container } from "./styles";
 
 export function MapLines({ optimizedCoordinates }) {
-  console.log("o optimizedCoordinates: ", optimizedCoordinates);
   return (
     <Polyline
       //testar primeiro com lat: lng: e depois tentar inverter a ordem

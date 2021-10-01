@@ -2,6 +2,13 @@ import { coordinates } from "../global/types/vroomTypes";
 
 const Polyline = require("@mapbox/polyline");
 
+const mockedGeometry =
+  "r~xjCdyofGeAZIBA}B?O?UDo@AeCCSg@gCCS@O@EDEr@QbAWR?OQEGSKIAWF[HyAb@k@Xo@^mA|@OJOJi@\\GFc@XEDQHi@VIBOHGDeCdBa@Zs@d@{AhAGDmAr@EBC@IDg@Tj@jBPh@j@fBjAlDBJFP\\tAjAzDJZ`@pABH@DfAhDbAfDPp@p@`Cz@YHCtAa@JEtAa@~Aq@FCNKBCN[XWl@OHDb@VNNLl@n@rCBRDP@HLl@Nz@FXLn@b@jCbF}AXIfEsAFCTIs@uCCICKAQ?S@m@?OEUAGQk@Wo@]wA}@}DOm@[yAkAgFKe@GSEWGUe@oBCKGQw@eDG]ESk@cCIc@YHaD~@";
+
+function getGeometry(response) {
+  return response?.routes[0]?.geometry;
+}
+
 //input handling
 
 function getJobs(pointsCoordinates: coordinates[]) {
@@ -61,15 +68,17 @@ export function getLatLngFromMyResponse(response) {
 }
 
 export function getOptimizedCoordinatesFromMyResponse(response) {
+  console.log(response?.code);
   if (response?.code === 0) {
     //debugger;
-    const latLng = Polyline.decode(response?.routes?.geometry).map((vertex: number[]) => {
+    console.log(response);
+    const latLng = Polyline.decode(getGeometry(response)).map((vertex: number[]) => {
       return {
         latitude: vertex[0],
         longitude: vertex[1],
       };
     });
-    console.log(latLng);
+    //console.log(latLng);
     return latLng;
   } else {
     return [];

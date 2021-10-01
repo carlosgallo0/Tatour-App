@@ -31,7 +31,7 @@ export function MapPage({ ...rest }) {
       getOptimizedCoordinatesFromMyResponse(optimizationResponse);
 
     setOptimizedPointsCoordinates(newOptimizedPointsCoordinates);
-    console.log("newOptimizedPointsCoordinates", newOptimizedPointsCoordinates);
+    //console.log("newOptimizedPointsCoordinates", newOptimizedPointsCoordinates);
   }, [optimizationResponse]);
 
   const mockRegion = {
@@ -56,12 +56,13 @@ export function MapPage({ ...rest }) {
     pointsCoordinates: coordinates[]
   ) {
     const inputJson = setOptimizationInput(baseCoordinates, pointsCoordinates);
+    debugger;
 
     const currentResponse = await postOptimizationAPI(inputJson);
 
     setOptimizationResponse(currentResponse);
 
-    console.log("o currentResponse: ", currentResponse);
+    //console.log("o currentResponse: ", currentResponse);
     // await setOptimizationResponse(currentResponse);
   }
 
@@ -73,7 +74,10 @@ export function MapPage({ ...rest }) {
         onPress={(e) => handleMapPressEvents(e.nativeEvent)}
         onLongPress={(e) => handleMapLongPressEvents(e.nativeEvent)}
       >
-        <MapLines optimizedCoordinates={optimizedPointsCoordinates} />
+        {optimizedPointsCoordinates && (
+          <MapLines optimizedCoordinates={optimizedPointsCoordinates} />
+        )}
+
         {baseCoordinates && (
           <Marker key={1} coordinate={baseCoordinates} title="Base">
             <View
@@ -110,12 +114,7 @@ export function MapPage({ ...rest }) {
         ))}
       </Map>
       {baseCoordinates && pointsCoordinates && (
-        <Button
-          onPress={() => handleOptimizationButtonPress(baseCoordinates, pointsCoordinates)}
-          onLongPress={() =>
-            optimizationResponse && getOptimizedCoordinatesFromMyResponse(optimizationResponse)
-          }
-        >
+        <Button onPress={() => handleOptimizationButtonPress(baseCoordinates, pointsCoordinates)}>
           <Title>OTIMIZAR ROTA</Title>
         </Button>
       )}

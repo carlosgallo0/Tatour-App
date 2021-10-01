@@ -1,7 +1,6 @@
 import React from "react";
 import { Polyline } from "react-native-maps";
 import { theme } from "../../../../global/styles/theme";
-import { Container } from "./styles";
 
 export function MapLines({ optimizedCoordinates }) {
   return (

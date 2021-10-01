@@ -26,6 +26,14 @@ export function MapPage({ ...rest }) {
   const [optimizedPointsCoordinates, setOptimizedPointsCoordinates] = useState<coordinates[]>([]);
   const [optimizationResponse, setOptimizationResponse] = useState();
 
+  useEffect(() => {
+    const newOptimizedPointsCoordinates =
+      getOptimizedCoordinatesFromMyResponse(optimizationResponse);
+
+    setOptimizedPointsCoordinates(newOptimizedPointsCoordinates);
+    console.log("newOptimizedPointsCoordinates", newOptimizedPointsCoordinates);
+  }, [optimizationResponse]);
+
   const mockRegion = {
     latitude: -22.908,
     longitude: -43.17,
@@ -42,13 +50,6 @@ export function MapPage({ ...rest }) {
   const handleMapPressEvents = (nativeEvent) => {
     setPointsCoordinates([...pointsCoordinates, nativeEvent.coordinate]);
   };
-
-  useEffect(() => {
-    const newOptimizedPointsCoordinates = getLatLngFromMyResponse(optimizationResponse);
-
-    setOptimizedPointsCoordinates(newOptimizedPointsCoordinates);
-    console.log("newOptimizedPointsCoordinates", newOptimizedPointsCoordinates);
-  }, [optimizationResponse]);
 
   async function handleOptimizationButtonPress(
     baseCoordinates: coordinates,
@@ -111,7 +112,9 @@ export function MapPage({ ...rest }) {
       {baseCoordinates && pointsCoordinates && (
         <Button
           onPress={() => handleOptimizationButtonPress(baseCoordinates, pointsCoordinates)}
-          onLongPress={() => getOptimizedCoordinatesFromMyResponse()}
+          onLongPress={() =>
+            optimizationResponse && getOptimizedCoordinatesFromMyResponse(optimizationResponse)
+          }
         >
           <Title>OTIMIZAR ROTA</Title>
         </Button>

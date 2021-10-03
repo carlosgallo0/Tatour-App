@@ -13,7 +13,6 @@ export const postOptimizationAPI = (inputOptimizationJson) => {
   })
     .then((response) => response.json())
     .then((response) => {
-      console.log("o response: ", response);
       return response;
     })
     .catch((err) => {

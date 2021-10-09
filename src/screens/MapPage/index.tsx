@@ -31,7 +31,6 @@ export function MapPage({ ...rest }) {
       getOptimizedCoordinatesFromMyResponse(optimizationResponse);
 
     setOptimizedRoutesCoordinates(newOptimizedPointsCoordinates);
-    //console.log("newOptimizedPointsCoordinates", newOptimizedPointsCoordinates);
   }, [optimizationResponse]);
 
   const mockRegion = {

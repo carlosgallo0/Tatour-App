@@ -7,7 +7,7 @@ export function MapLines({ optimizedCoordinates }) {
     <Polyline
       //testar primeiro com lat: lng: e depois tentar inverter a ordem
       coordinates={optimizedCoordinates}
-      strokeColor={theme.colors.secondary100} // fallback for when `strokeColors` is not supported by the map-provider
+      strokeColor={theme.colors.primary150} // fallback for when `strokeColors` is not supported by the map-provider
       //   strokeColors={[
       //     "#7F0000",
       //     "#00000000", // no color, creates a "long" gradient between the previous and next coordinate
@@ -16,8 +16,8 @@ export function MapLines({ optimizedCoordinates }) {
       //     "#238C23",
       //     "#7F0000",
       //   ]}
-      strokeWidth={4}
-      lineDashPattern={[5]}
+      strokeWidth={6}
+      lineDashPattern={[3]}
     ></Polyline>
   );
 }

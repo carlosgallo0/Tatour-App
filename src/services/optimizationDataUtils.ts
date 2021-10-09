@@ -40,6 +40,14 @@ export function setOptimizationInput(
     const options = {
       g: true,
     };
+    console.log(
+      "meu request:",
+      JSON.stringify({
+        jobs,
+        vehicles,
+        options,
+      })
+    );
     return {
       jobs,
       vehicles,
@@ -65,10 +73,7 @@ export function getLatLngFromMyResponse(response) {
 }
 
 export function getOptimizedCoordinatesFromMyResponse(response) {
-  console.log(response?.code);
   if (response?.code === 0) {
-    //debugger;
-    console.log(response);
     const latLng = Polyline.decode(getGeometry(response)).map((vertex: number[]) => {
       return {
         latitude: vertex[0],

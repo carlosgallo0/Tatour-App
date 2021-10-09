@@ -8,8 +8,6 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import { RFValue, RFPercentage } from "react-native-responsive-fontsize";
 
-import { Dimensions } from "react-native";
-
 export const Container = styled.View`
   align-items: center;
   justify-content: center;
@@ -42,9 +40,9 @@ export const Button = styled.TouchableOpacity`
   justify-content: space-evenly;
 
   height: ${RFPercentage(7)}px;
-  width: ${RFPercentage(40)}px;
+  width: ${RFPercentage(45)}px;
 
-  background-color: ${theme.colors.primary150};
+  background-color: ${theme.colors.secondary75};
 
   border-color: ${theme.colors.light50};
   border-width: 2px;

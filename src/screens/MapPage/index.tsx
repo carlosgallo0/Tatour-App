@@ -7,6 +7,8 @@ import { Container, Map, Title, Button, Icon } from "./styles";
 import { CustomMarker, CustomMarkerProps } from "../../components/CustomMarker";
 import { MapLines } from "./components/MapLines";
 
+import { myExperimentMapStyles } from "../../utils/mapStyles";
+
 import { coordinates } from "../../global/types/vroomTypes";
 
 import {
@@ -14,7 +16,10 @@ import {
   getLatLngFromMyResponse,
   getOptimizedCoordinatesFromMyResponse,
 } from "../../services/optimizationDataUtils";
+
 import { postOptimizationAPI } from "../../services/api";
+
+import { myPayloadExperiment } from "../../services/payload_example";
 
 type Props = MapViewProps & {
   title: string;
@@ -31,7 +36,6 @@ export function MapPage({ ...rest }) {
       getOptimizedCoordinatesFromMyResponse(optimizationResponse);
 
     setOptimizedPointsCoordinates(newOptimizedPointsCoordinates);
-    //console.log("newOptimizedPointsCoordinates", newOptimizedPointsCoordinates);
   }, [optimizationResponse]);
 
   const mockRegion = {
@@ -56,9 +60,8 @@ export function MapPage({ ...rest }) {
     pointsCoordinates: coordinates[]
   ) {
     const inputJson = setOptimizationInput(baseCoordinates, pointsCoordinates);
-    debugger;
 
-    const currentResponse = await postOptimizationAPI(inputJson);
+    const currentResponse = await postOptimizationAPI(myPayloadExperiment);
 
     setOptimizationResponse(currentResponse);
 
@@ -73,6 +76,7 @@ export function MapPage({ ...rest }) {
         initialRegion={mockRegion}
         onPress={(e) => handleMapPressEvents(e.nativeEvent)}
         onLongPress={(e) => handleMapLongPressEvents(e.nativeEvent)}
+        customMapStyle={myExperimentMapStyles}
       >
         {optimizedPointsCoordinates && (
           <MapLines optimizedCoordinates={optimizedPointsCoordinates} />
@@ -113,11 +117,10 @@ export function MapPage({ ...rest }) {
           </Marker>
         ))}
       </Map>
-      {baseCoordinates && pointsCoordinates && (
-        <Button onPress={() => handleOptimizationButtonPress(baseCoordinates, pointsCoordinates)}>
-          <Title>OTIMIZAR ROTA</Title>
-        </Button>
-      )}
+
+      <Button onPress={() => handleOptimizationButtonPress(baseCoordinates, pointsCoordinates)}>
+        <Title>REALIZAR EXPERIMENTO</Title>
+      </Button>
     </Container>
   );
 }

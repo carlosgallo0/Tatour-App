@@ -1,146 +1,150 @@
-export const defaultJsonExample = {
-	"jobs": [
-		{
-			"id": 1,
-			"service": 300,
-			"amount": [
-				1
-			],
-			"location": [
-				1.98935,
-				48.701
-			],
-			"skills": [
-				1
-			],
-			"time_windows": [
-				[
-					32400,
-					36000
-				]
-			]
-		},
-		{
-			"id": 2,
-			"service": 300,
-			"amount": [
-				1
-			],
-			"location": [
-				2.03655,
-				48.61128
-			],
-			"skills": [
-				1
-			]
-		},
-		{
-			"id": 3,
-			"service": 300,
-			"amount": [
-				1
-			],
-			"location": [
-				2.39719,
-				49.07611
-			],
-			"skills": [
-				2
-			]
-		},
-		{
-			"id": 4,
-			"service": 300,
-			"amount": [
-				1
-			],
-			"location": [
-				2.41808,
-				49.22619
-			],
-			"skills": [
-				2
-			]
-		},
-		{
-			"id": 5,
-			"service": 300,
-			"amount": [
-				1
-			],
-			"location": [
-				2.28325,
-				48.5958
-			],
-			"skills": [
-				14
-			]
-		},
-		{
-			"id": 6,
-			"service": 300,
-			"amount": [
-				1
-			],
-			"location": [
-				2.89357,
-				48.90736
-			],
-			"skills": [
-				14
-			]
-		}
-	],
-	"vehicles": [
-		{
-			"id": 1,
-			"profile": "driving-car",
-			"start": [
-				2.35044,
-				48.71764
-			],
-			"end": [
-				2.35044,
-				48.71764
-			],
-			"capacity": [
-				4
-			],
-			"skills": [
-				1,
-				14
-			],
-			"time_window": [
-				28800,
-				43200
-			]
-		},
-		{
-			"id": 2,
-			"profile": "driving-car",
-			"start": [
-				2.35044,
-				48.71764
-			],
-			"end": [
-				2.35044,
-				48.71764
-			],
-			"capacity": [
-				4
-			],
-			"skills": [
-				2,
-				14
-			],
-			"time_window": [
-				28800,
-				43200
-			]
-		}
-	]
-}
+export const myPayloadExperiment = {
+  jobs: [
+    {
+      id: 0,
+      service: 300,
+      location: [-43.17825973033905, -22.904725270597346],
+      time_windows: [[32400, 68400]],
+    },
+    {
+      id: 1,
+      service: 300,
+      location: [-43.176945112645626, -22.908767935283564],
+      time_windows: [[32400, 68400]],
+    },
+    {
+      id: 2,
+      service: 300,
+      location: [-43.18107470870018, -22.91192384771578],
+      time_windows: [[32400, 68400]],
+    },
+    {
+      id: 3,
+      service: 300,
+      location: [-43.18292643874884, -22.90409399870804],
+      time_windows: [[32400, 68400]],
+    },
+    {
+      id: 4,
+      service: 300,
+      location: [-43.18424139171839, -22.911360242165077],
+      time_windows: [[32400, 68400]],
+    },
+    {
+      id: 5,
+      service: 300,
+      location: [-43.17963067442178, -22.917433161572003],
+      time_windows: [[32400, 68400]],
+    },
+    {
+      id: 6,
+      service: 300,
+      location: [-43.17476011812687, -22.911548934476127],
+      time_windows: [[32400, 68400]],
+    },
+    {
+      id: 7,
+      service: 300,
+      location: [-43.17166719585657, -22.90402636225989],
+      time_windows: [[32400, 68400]],
+    },
+    {
+      id: 8,
+      service: 300,
+      location: [-43.17461159080267, -22.90561194938921],
+      time_windows: [[32400, 68400]],
+    },
+    {
+      id: 9,
+      service: 300,
+      location: [-43.18292643874884, -22.90028962772082],
+      time_windows: [[32400, 68400]],
+    },
+    {
+      id: 10,
+      service: 300,
+      location: [-43.181907869875424, -22.91736429653096],
+      time_windows: [[32400, 68400]],
+    },
+  ],
+  vehicles: [
+    {
+      id: 1,
+      profile: "driving-car",
+      start: [-43.18074144423008, -22.90858047442955],
+      end: [-43.18074144423008, -22.90858047442955],
+    },
+  ],
+  options: { g: true },
+};
 
+export const defaultJsonExample = {
+  jobs: [
+    {
+      id: 1,
+      service: 300,
+      amount: [1],
+      location: [1.98935, 48.701],
+      skills: [1],
+      time_windows: [[32400, 36000]],
+    },
+    {
+      id: 2,
+      service: 300,
+      amount: [1],
+      location: [2.03655, 48.61128],
+      skills: [1],
+    },
+    {
+      id: 3,
+      service: 300,
+      amount: [1],
+      location: [2.39719, 49.07611],
+      skills: [2],
+    },
+    {
+      id: 4,
+      service: 300,
+      amount: [1],
+      location: [2.41808, 49.22619],
+      skills: [2],
+    },
+    {
+      id: 5,
+      service: 300,
+      amount: [1],
+      location: [2.28325, 48.5958],
+      skills: [14],
+    },
+    {
+      id: 6,
+      service: 300,
+      amount: [1],
+      location: [2.89357, 48.90736],
+      skills: [14],
+    },
+  ],
+  vehicles: [
+    {
+      id: 1,
+      profile: "driving-car",
+      start: [2.35044, 48.71764],
+      end: [2.35044, 48.71764],
+      capacity: [4],
+      skills: [1, 14],
+      time_window: [28800, 43200],
+    },
+    {
+      id: 2,
+      profile: "driving-car",
+      start: [2.35044, 48.71764],
+      end: [2.35044, 48.71764],
+      capacity: [4],
+      skills: [2, 14],
+      time_window: [28800, 43200],
+    },
+  ],
+};
 
 export const payloadExample = {
   jobs: [

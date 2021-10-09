@@ -23,28 +23,28 @@ type Props = MapViewProps & {
 export function MapPage({ ...rest }) {
   const [baseCoordinates, setBaseCoordinates] = useState<coordinates>();
   const [pointsCoordinates, setPointsCoordinates] = useState<coordinates[]>([]);
-  const [optimizedPointsCoordinates, setOptimizedPointsCoordinates] = useState<coordinates[]>([]);
+  const [optimizedRoutesCoordinates, setOptimizedRoutesCoordinates] = useState<coordinates[]>([]);
   const [optimizationResponse, setOptimizationResponse] = useState();
 
   useEffect(() => {
     const newOptimizedPointsCoordinates =
       getOptimizedCoordinatesFromMyResponse(optimizationResponse);
 
-    setOptimizedPointsCoordinates(newOptimizedPointsCoordinates);
+    setOptimizedRoutesCoordinates(newOptimizedPointsCoordinates);
     //console.log("newOptimizedPointsCoordinates", newOptimizedPointsCoordinates);
   }, [optimizationResponse]);
 
   const mockRegion = {
-    latitude: -22.908,
-    longitude: -43.17,
-    latitudeDelta: 0.06,
-    longitudeDelta: 0.04,
+    latitude: -22.909,
+    longitude: -43.185,
+    latitudeDelta: 0.027,
+    longitudeDelta: 0.025,
   };
 
   const handleMapLongPressEvents = (nativeEvent) => {
     setBaseCoordinates(nativeEvent.coordinate);
     setPointsCoordinates([]);
-    setOptimizedPointsCoordinates([]);
+    setOptimizedRoutesCoordinates([]);
   };
 
   const handleMapPressEvents = (nativeEvent) => {
@@ -56,14 +56,10 @@ export function MapPage({ ...rest }) {
     pointsCoordinates: coordinates[]
   ) {
     const inputJson = setOptimizationInput(baseCoordinates, pointsCoordinates);
-    debugger;
 
     const currentResponse = await postOptimizationAPI(inputJson);
 
     setOptimizationResponse(currentResponse);
-
-    //console.log("o currentResponse: ", currentResponse);
-    // await setOptimizationResponse(currentResponse);
   }
 
   return (
@@ -74,8 +70,8 @@ export function MapPage({ ...rest }) {
         onPress={(e) => handleMapPressEvents(e.nativeEvent)}
         onLongPress={(e) => handleMapLongPressEvents(e.nativeEvent)}
       >
-        {optimizedPointsCoordinates && (
-          <MapLines optimizedCoordinates={optimizedPointsCoordinates} />
+        {optimizedRoutesCoordinates && (
+          <MapLines optimizedCoordinates={optimizedRoutesCoordinates} />
         )}
 
         {baseCoordinates && (

@@ -108,9 +108,14 @@ export function MapPage({ ...rest }) {
           </Marker>
         ))}
       </Map>
-      {baseCoordinates && pointsCoordinates && (
+      {baseCoordinates && (
         <Button onPress={() => handleOptimizationButtonPress(baseCoordinates, pointsCoordinates)}>
           <Title>OTIMIZAR ROTA</Title>
+        </Button>
+      )}
+      {!baseCoordinates && (
+        <Button>
+          <Title>PRESSIONE O MAPA</Title>
         </Button>
       )}
     </Container>
